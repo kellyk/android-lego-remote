@@ -5,6 +5,8 @@ import android.app.Activity;
 import android.bluetooth.*;
 import android.content.Intent;
 import android.view.Menu;
+import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -18,7 +20,7 @@ public class MainActivity extends Activity {
 		
 		int REQUEST_ENABLE_BT = 10;
 		
-		BluetoothAdapter mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+		final BluetoothAdapter mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
 		if (mBluetoothAdapter != null) {
 		    // Device supports bluetooth
 			if (!mBluetoothAdapter.isEnabled()) {
@@ -33,6 +35,17 @@ public class MainActivity extends Activity {
 				iv.setImageResource(R.drawable.bluetooth_active);
 			}	 
 		}	
+		
+		Button b = (Button) findViewById(R.id.ui_connect_button1);
+		 b.setOnClickListener(new OnClickListener() {
+				
+				@Override
+				public void onClick(View v) {
+					TextView tv = (TextView) findViewById(R.id.ui_connect_status);
+					tv.setText("Connect button pressed");
+				}
+
+			});
 	}
 	protected void onActivityResult (int requestCode, int resultCode, Intent data) {
 		if (requestCode == 10)

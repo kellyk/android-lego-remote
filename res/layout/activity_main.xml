@@ -49,4 +49,13 @@
         android:layout_centerVertical="true"
         android:text="@string/connect_button_connect" />
 
+    <TextView
+        android:id="@+id/ui_connect_status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ui_connect_button1"
+        android:layout_marginTop="54dp"
+        android:layout_toLeftOf="@+id/ui_connect_button1"
+        android:text="TextView" />
+
 </RelativeLayout>
