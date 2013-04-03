@@ -27,12 +27,12 @@ public class MainActivity extends Activity {
 		final BluetoothAdapter mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
 		if (mBluetoothAdapter != null) {  //yes, bluetooth is supported
 			if (!mBluetoothAdapter.isEnabled()) {
-				//not enabled; prompt user to connect
+				//bluetooth is off; prompt user to connect
 			    Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
 			    startActivityForResult(enableBtIntent, REQUEST_ENABLE_BT);
 			}
 			else {
-				//enabled; show "Connected" text and bluetooth image
+				//bluetooth is on; show "connected" text and bluetooth image
 				TextView tv = (TextView) findViewById(R.id.ui_connect_textView2);
 				tv.setText(R.string.connect_text_on);
 				
@@ -48,7 +48,6 @@ public class MainActivity extends Activity {
 		//Create handle and onclick event for Connect button
 		Button b = (Button) findViewById(R.id.ui_connect_button1);
 		 b.setOnClickListener(new OnClickListener() {
-				
 				@Override
 				public void onClick(View v) {
 					//On click, get a list of connected devices
@@ -62,9 +61,9 @@ public class MainActivity extends Activity {
 					    }
 					}
 				}
-
-			});
+		});
 	}
+	
 	//Grab the result of Start activity (So far, only activity is prompting user to connect bluetooth
 	protected void onActivityResult (int requestCode, int resultCode, Intent data) {
 		if (requestCode == 10) //catches result from when user was prompted to connect bluetooth
