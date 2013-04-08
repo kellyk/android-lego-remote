@@ -42,20 +42,60 @@
         android:textSize="20sp" />
 
     <Button
+        android:id="@+id/disconnectButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/ui_connect_button1"
+        android:layout_alignBottom="@+id/ui_connect_button1"
+        android:layout_alignRight="@+id/ui_connect_textView1"
+        android:onClick="disconnectNXT"
+        android:text="Disconnect" />
+
+    <Button
         android:id="@+id/ui_connect_button1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
+        android:layout_alignLeft="@+id/imageView1"
         android:layout_centerVertical="true"
         android:text="@string/connect_button_connect" />
 
-    <TextView
-        android:id="@+id/ui_connect_status"
+    <Button
+        android:id="@+id/buttonForward"
+        style="?android:attr/buttonStyleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/ui_connect_button1"
-        android:layout_marginTop="54dp"
-        android:layout_toLeftOf="@+id/ui_connect_button1"
-        android:text="TextView" />
+        android:layout_marginTop="20dp"
+        android:layout_toRightOf="@+id/imageView1"
+        android:text="Forward" />
+
+    <Button
+        android:id="@+id/buttonBackward"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/buttonForward"
+        android:layout_toRightOf="@+id/imageView1"
+        android:text="Backword" />
+
+    <Button
+        android:id="@+id/buttonLeft"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/buttonBackward"
+        android:layout_alignRight="@+id/imageView1"
+        android:layout_marginBottom="19dp"
+        android:text="Left" />
+
+    <Button
+        android:id="@+id/buttonRight"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/buttonLeft"
+        android:layout_alignBottom="@+id/buttonLeft"
+        android:layout_toRightOf="@+id/buttonBackward"
+        android:text="Right" />
 
 </RelativeLayout>
