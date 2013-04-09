@@ -51,10 +51,6 @@ public class MainActivity extends Activity implements OnTouchListener{
 		Button right = (Button) findViewById(R.id.buttonRight);
 		right.setOnTouchListener(this);
 		
-		setUpUI();
-	}
-	
-	private void setUpUI() {
 		//Create handle to bluetooth and check for device support
 		mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
 		if (mBluetoothAdapter != null) {  //yes, bluetooth is supported
@@ -108,6 +104,7 @@ public class MainActivity extends Activity implements OnTouchListener{
 		}
 	}
 	
+	//Set on touch listeners for arrow buttons
 	@Override
 	public boolean onTouch(View v, MotionEvent event) {
 		int action = event.getAction();
@@ -204,10 +201,6 @@ public class MainActivity extends Activity implements OnTouchListener{
 		catch (Exception e)	{
 			Log.e(tag,"Error in disconnect -> " + e.getMessage());
 		}
-	}
-
-	public void startNXT(View v) {
-		MoveMotor(2, 75, 0x20);
 	}
 	
 	public void stopNXT(View v) {
