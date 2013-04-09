@@ -10,5 +10,6 @@
     <string name="connect_text_on">Bluetooth is on!</string>
     
     <string name="connect_button_connect">Connect</string>
+    <string name="connect_button_disconnect">Disconnect</string>
 
 </resources>

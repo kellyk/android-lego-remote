@@ -19,16 +19,6 @@
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:textSize="16sp" />
 
-    <ImageView
-        android:id="@+id/imageView1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/ui_connect_textView1"
-        android:layout_below="@+id/ui_connect_textView1"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="19dp"
-        android:src="@drawable/bluetooth_inactive" />
-
     <TextView
         android:id="@+id/ui_connect_textView2"
         android:layout_width="wrap_content"
@@ -49,53 +39,57 @@
         android:layout_alignBottom="@+id/ui_connect_button1"
         android:layout_alignRight="@+id/ui_connect_textView1"
         android:onClick="disconnectNXT"
-        android:text="Disconnect" />
+        android:text="@string/connect_button_disconnect" />
+
+    <ImageButton
+        android:id="@+id/buttonRight"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/imageButtonBackward"
+        android:layout_toRightOf="@+id/imageButtonBackward"
+        android:src="@drawable/right" />
 
     <Button
         android:id="@+id/ui_connect_button1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/imageView1"
-        android:layout_centerVertical="true"
+        android:layout_below="@+id/imageView1"
+        android:layout_marginTop="20dp"
         android:text="@string/connect_button_connect" />
 
-    <Button
-        android:id="@+id/buttonForward"
-        style="?android:attr/buttonStyleSmall"
+    <ImageButton
+        android:id="@+id/imageButtonLeft"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/ui_connect_button1"
-        android:layout_marginTop="20dp"
-        android:layout_toRightOf="@+id/imageView1"
-        android:text="Forward" />
-
-    <Button
-        android:id="@+id/buttonBackward"
-        style="?android:attr/buttonStyleSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/buttonForward"
-        android:layout_toRightOf="@+id/imageView1"
-        android:text="Backword" />
-
-    <Button
-        android:id="@+id/buttonLeft"
-        style="?android:attr/buttonStyleSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/buttonBackward"
         android:layout_alignRight="@+id/imageView1"
-        android:layout_marginBottom="19dp"
-        android:text="Left" />
+        android:layout_alignTop="@+id/imageButtonBackward"
+        android:src="@drawable/left" />
 
-    <Button
-        android:id="@+id/buttonRight"
-        style="?android:attr/buttonStyleSmall"
+    <ImageButton
+        android:id="@+id/imageButtonBackward"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/buttonLeft"
-        android:layout_alignBottom="@+id/buttonLeft"
-        android:layout_toRightOf="@+id/buttonBackward"
-        android:text="Right" />
+        android:layout_alignLeft="@+id/imageButtonForward"
+        android:layout_below="@+id/imageButtonForward"
+        android:src="@drawable/down" />
+
+    <ImageView
+        android:id="@+id/imageView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ui_connect_textView1"
+        android:layout_marginTop="15dp"
+        android:layout_toLeftOf="@+id/imageButtonForward"
+        android:src="@drawable/bluetooth_inactive" />
+
+    <ImageButton
+        android:id="@+id/imageButtonForward"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/disconnectButton"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="19dp"
+        android:src="@drawable/forward" />
 
 </RelativeLayout>

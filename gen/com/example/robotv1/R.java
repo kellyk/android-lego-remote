@@ -26,19 +26,28 @@ public final class R {
     public static final class drawable {
         public static final int bluetooth_active=0x7f020000;
         public static final int bluetooth_inactive=0x7f020001;
-        public static final int ic_launcher=0x7f020002;
+        public static final int down=0x7f020002;
+        public static final int down_press=0x7f020003;
+        public static final int forward=0x7f020004;
+        public static final int ic_launcher=0x7f020005;
+        public static final int left=0x7f020006;
+        public static final int left_press=0x7f020007;
+        public static final int right=0x7f020008;
+        public static final int right_press=0x7f020009;
+        public static final int up=0x7f02000a;
+        public static final int up_press=0x7f02000b;
     }
     public static final class id {
         public static final int action_settings=0x7f090009;
-        public static final int buttonBackward=0x7f090006;
-        public static final int buttonForward=0x7f090005;
-        public static final int buttonLeft=0x7f090007;
-        public static final int buttonRight=0x7f090008;
+        public static final int buttonRight=0x7f090005;
         public static final int disconnectButton=0x7f090003;
-        public static final int imageView1=0x7f090001;
+        public static final int imageButtonBackward=0x7f090006;
+        public static final int imageButtonForward=0x7f090008;
+        public static final int imageButtonLeft=0x7f090007;
+        public static final int imageView1=0x7f090002;
         public static final int ui_connect_button1=0x7f090004;
         public static final int ui_connect_textView1=0x7f090000;
-        public static final int ui_connect_textView2=0x7f090002;
+        public static final int ui_connect_textView2=0x7f090001;
     }
     public static final class layout {
         public static final int activity_main=0x7f030000;
@@ -50,6 +59,7 @@ public final class R {
         public static final int action_settings=0x7f060001;
         public static final int app_name=0x7f060000;
         public static final int connect_button_connect=0x7f060006;
+        public static final int connect_button_disconnect=0x7f060007;
         public static final int connect_text_off=0x7f060004;
         public static final int connect_text_on=0x7f060005;
         public static final int connect_text_title=0x7f060003;

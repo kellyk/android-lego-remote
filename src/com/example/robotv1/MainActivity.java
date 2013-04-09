@@ -5,6 +5,7 @@ import java.io.OutputStream;
 import java.util.Iterator;
 import java.util.Set;
 import java.util.UUID;
+import java.util.List;
 
 import android.os.Bundle;
 import android.app.Activity;
@@ -17,6 +18,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnTouchListener;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -27,30 +29,30 @@ public class MainActivity extends Activity implements OnTouchListener{
 	final String ROBOTNAME = "Steve";
 	private final UUID SP_UUID = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB");
 	int REQUEST_ENABLE_BT = 1;
-	
+
 	// BT Variables
 	private Set<BluetoothDevice> pairedDevices;
 	private BluetoothSocket socket;
 	private BluetoothDevice bd;
 	private InputStream is = null;
 	private OutputStream os = null;
-	
-	
+	private List<BluetoothDevice>  deviceNames;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		
 		//set on touch listeners for forward, backward, left and right buttons
-		Button forward = (Button) findViewById(R.id.buttonForward);
+		ImageButton forward = (ImageButton) findViewById(R.id.imageButtonForward);
 		forward.setOnTouchListener(this);
-		Button backward = (Button) findViewById(R.id.buttonBackward);
+		ImageButton backward = (ImageButton) findViewById(R.id.imageButtonBackward);
 		backward.setOnTouchListener(this);
-		Button left = (Button) findViewById(R.id.buttonLeft);
+		ImageButton left = (ImageButton) findViewById(R.id.imageButtonLeft);
 		left.setOnTouchListener(this);
-		Button right = (Button) findViewById(R.id.buttonRight);
+		ImageButton right = (ImageButton) findViewById(R.id.buttonRight);
 		right.setOnTouchListener(this);
-		
+
 		//Create handle to bluetooth and check for device support
 		mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
 		if (mBluetoothAdapter != null) {  //yes, bluetooth is supported
@@ -63,7 +65,7 @@ public class MainActivity extends Activity implements OnTouchListener{
 				//bluetooth is on; show "connected" text and bluetooth image
 				TextView connectedText = (TextView) findViewById(R.id.ui_connect_textView2);
 				connectedText.setText(R.string.connect_text_on);
-				
+
 				ImageView bluetoothImage = (ImageView) findViewById(R.id.imageView1);
 				bluetoothImage.setImageResource(R.drawable.bluetooth_active);
 			}	 
@@ -72,11 +74,10 @@ public class MainActivity extends Activity implements OnTouchListener{
 			Button connectButton = (Button) findViewById(R.id.ui_connect_button1);
 			connectButton.setEnabled(false);
 		}
-		
+
 		//Create handle and onclick event for Connect button
 		Button connectButton = (Button) findViewById(R.id.ui_connect_button1);
 		 connectButton.setOnClickListener(new OnClickListener() {
-				
 		 	@Override
 			public void onClick(View v) {
 				connectNXT();
@@ -91,7 +92,7 @@ public class MainActivity extends Activity implements OnTouchListener{
 			if (resultCode == -1) { //success
 				TextView tv = (TextView) findViewById(R.id.ui_connect_textView2);
 				tv.setText(R.string.connect_text_on);
-				
+
 				ImageView bluetoothImage = (ImageView) findViewById(R.id.imageView1);
 				bluetoothImage.setImageResource(R.drawable.bluetooth_active);
 			}
@@ -103,7 +104,7 @@ public class MainActivity extends Activity implements OnTouchListener{
 			}
 		}
 	}
-	
+
 	//Set on touch listeners for arrow buttons
 	@Override
 	public boolean onTouch(View v, MotionEvent event) {
@@ -114,13 +115,13 @@ public class MainActivity extends Activity implements OnTouchListener{
 		 	case MotionEvent.ACTION_DOWN:
 		 		switch(buttonID)
 		 		{
-			 		case R.id.buttonForward:
+			 		case R.id.imageButtonForward:
 			 			forward(v);
 			 			break;
-			 		case R.id.buttonBackward:
+			 		case R.id.imageButtonBackward:
 			 			backward(v);
 			 			break;
-			 		case R.id.buttonLeft:
+			 		case R.id.imageButtonLeft:
 			 			left(v);
 			 			break;
 			 		case R.id.buttonRight:
@@ -131,8 +132,8 @@ public class MainActivity extends Activity implements OnTouchListener{
 		 		}
 		 		break;
 		 	case MotionEvent.ACTION_UP:
-			     stopNXT(v);
-			      break;
+			    stopNXT(v);
+			    break;
 		 	default:
 		 		break;
 		 }
@@ -141,14 +142,14 @@ public class MainActivity extends Activity implements OnTouchListener{
 		 else
 			 return false;
 	}
-	
+
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.main, menu);
 		return true;
 	}
-	
+
 	public void connectNXT() {
 		try	{
 			//On click, get a list of connected devices
@@ -160,6 +161,13 @@ public class MainActivity extends Activity implements OnTouchListener{
 	    		while (it.hasNext()) {
 	       			bd = it.next();
 	    			Log.i(tag,"Name of peer is [" + bd.getName() + "]");
+	    			try {
+	    				deviceNames.add(bd);
+		    			Log.i(tag,"Item was added to list");
+	    			}
+	    			catch (Exception e){
+		    			Log.i(tag,"No idea what is wrong with list");
+	    			}
 	    			if (bd.getName().equalsIgnoreCase(ROBOTNAME)) {
 	    				Log.i(tag, "Found "+ bd.getName() + " with ID " + bd.getAddress());
 	    				Log.i(tag,bd.getBluetoothClass().toString());
@@ -171,7 +179,7 @@ public class MainActivity extends Activity implements OnTouchListener{
 	    				catch (Exception e) {
 	    					Log.e(tag,"Error interacting with remote device -> " + e.getMessage()); 
 	    				}
-	    				
+
 	        			try {
 	        				is = socket.getInputStream();
 	        				os = socket.getOutputStream();
@@ -189,7 +197,7 @@ public class MainActivity extends Activity implements OnTouchListener{
 			Log.e(tag,"Failed in finding NXT -> " + e.getMessage());
 		}
 	}
-	
+
 	public void disconnectNXT(View v) {
 		try {
 			Log.i(tag,"Attempting to break BT connection of " + bd.getName());
@@ -202,37 +210,37 @@ public class MainActivity extends Activity implements OnTouchListener{
 			Log.e(tag,"Error in disconnect -> " + e.getMessage());
 		}
 	}
-	
+
 	public void stopNXT(View v) {
 		MoveMotor(0, 0, 0x00);
 		MoveMotor(1, 75, 0x00);
 		MoveMotor(2, 75, 0x00);
 	}
-	
+
 	public void forward(View v) {
 		MoveMotor(1, 75, 0x20);
 		MoveMotor(2, 75, 0x20);
 	}
-	
+
 	public void backward(View v) {
 		MoveMotor(1, -75, 0x20);
 		MoveMotor(2, -75, 0x20);
 	}
-	
+
 	public void left(View v) {
 		MoveMotor(1, 75, 0x20);
 	}
-	
+
 	public void right(View v) {
 		MoveMotor(2, 75, 0x20);
 	}
-	
+
 	private void MoveMotor(int motor,int speed, int state) {
 		try {
 			Log.i(tag,"Attempting to move [" + motor + " @ " + speed + "]");
-			
+
 			byte[] buffer = new byte[15];
-			
+
 			buffer[0] = (byte) (15-2);			//length lsb
 			buffer[1] = 0;						// length msb
 			buffer[2] =  0;						// direct command (with response)
@@ -251,7 +259,7 @@ public class MainActivity extends Activity implements OnTouchListener{
 
 			os.write(buffer);
 			os.flush();
-			
+
 		}
 		catch (Exception e) {
 			Log.e(tag,"Error in MoveForward(" + e.getMessage() + ")");
